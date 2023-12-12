@@ -73,4 +73,23 @@ dados_sem_vazio.reset_index(drop=True, inplace=True)
 
 dados_sem_vazio.info()
 
+dados_sem_vazio.duplicated().sum()
+#para saber se existe celulas duplicadas .duplicated() e para saber quantas .sum() para somar todas elas
+
+filtro_duplicadas = dados_sem_vazio.duplicated()
+# criando uma definição
+
+dados_sem_vazio[filtro_duplicadas]
+# para identificar quais são as amostras são duplicadas
+
+dados_sem_vazio.drop_duplicates(inplace=True)
+# drop_duplicates() para retirar amostras duplicadas
+# e para que faça a remoção (inplace=True)
+
+dados_sem_vazio
+# vizualiçao da tabela
+
+dados_sem_vazio.duplicated().sum
+# vizualição do somatório das duplicadas, tendo agora um total de 0
+
 # %%
