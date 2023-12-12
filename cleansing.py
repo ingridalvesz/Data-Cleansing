@@ -92,4 +92,54 @@ dados_sem_vazio
 dados_sem_vazio.duplicated().sum
 # vizualição do somatório das duplicadas, tendo agora um total de 0
 
+dados_sem_vazio.isna()
+# para verificar se existem dados vazios .isna() ou seja (is N/A) que significa "é nulo" ou "não está disponível".
+
+dados_sem_vazio.isna().sum()
+# contando os vazios da tabela .sum()
+
+dados_sem_vazio.isna().sum().sum()
+# contando os vazios totais da tabela .sum().sum()
+
+dados_sem_vazio[dados_sem_vazio.isna().any(axis=1)]
+# para saber quantas amostras diferentes possuem dados nulos .isna().any(), passando axis igual à 1 para fazer referência a coluna
+
+filtro = dados_sem_vazio['cliente.tempo_servico'].isna()
+# foi criado uma definição para verificar quais amostras tem nulos na coluna "cliente.tempo_servico"
+
+dados_sem_vazio[filtro][['cliente.tempo_servico','conta.cobranca.mensal','conta.cobranca.Total']]
+# selecionando as três colunas que se interligam
+
+import numpy as np 
+np.ceil(5957.90/90.45)
+#usando o método np.ceil() para realizar a divisão
+
+dados_sem_vazio['cliente.tempo_servico'].fillna(
+    np.ceil
+        (dados_sem_vazio['conta.cobranca.Total'] / dados_sem_vazio['conta.cobranca.mensal']
+    ), inplace=True
+)
+# para aplicar em toda a coluna a divisão feita com np.ceil usamos o inplace=True depois de ter selecionados as colunas desejadas
+
+dados_sem_vazio[filtro][['cliente.tempo_servico','conta.cobranca.mensal','conta.cobranca.Total']]
+# vizualizar tabela
+
+dados_sem_vazio.isna().sum()
+# somar vazios 
+
+dados_sem_vazio['conta.contrato'].value_counts()
+
+colunas_dropar = ['conta.contrato', 'conta.faturamente_eletronico', 'conta.metodo_pagamento']
+
+dados_sem_vazio[colunas_dropar].isna().any(axis=1).sum()
+
+df_sem_nulos = dados_sem_vazio.dropna(subset=colunas_dropar).copy()
+df_sem_nulos.head()
+
+df_sem_nulos.reset_index(drop=True, inplace=True)
+
+df_sem_nulos.isna().sum()
+
+
+
 # %%
